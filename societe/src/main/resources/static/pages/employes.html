@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Employés</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Gestion RH</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="employes.html">Employés</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="departements.html">Départements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="statistiques.html">Statistiques</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestion des Employés</h1>
+
+    <!-- Ajouter un employé -->
+    <div class="mb-4">
+        <h2>Ajouter un Employé</h2>
+        <form id="add-employe-form">
+            <div class="mb-3">
+                <label for="nomEmp" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nomEmp" required>
+            </div>
+            <div class="mb-3">
+                <label for="salaire" class="form-label">Salaire</label>
+                <input type="number" class="form-control" id="salaire" required>
+            </div>
+            <div class="mb-3">
+                <label for="refDeptId" class="form-label">Département</label>
+                <input type="text" class="form-control" id="refDeptId" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Modifier un employé -->
+    <div class="mb-4">
+        <h2>Modifier un Employé</h2>
+        <form id="update-employe-form">
+            <div class="mb-3">
+                <label for="updateEmployeId" class="form-label">ID de l'Employé</label>
+                <input type="number" class="form-control" id="updateEmployeId" required>
+            </div>
+            <div class="mb-3">
+                <label for="updateNomEmp" class="form-label">Nouveau Nom</label>
+                <input type="text" class="form-control" id="updateNomEmp">
+            </div>
+            <div class="mb-3">
+                <label for="updateSalaire" class="form-label">Nouveau Salaire</label>
+                <input type="number" class="form-control" id="updateSalaire">
+            </div>
+            <div class="mb-3">
+                <label for="updateRefDeptId" class="form-label">Nouveau Département</label>
+                <input type="text" class="form-control" id="updateRefDeptId">
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+    </div>
+
+    <!-- Supprimer un employé -->
+    <div class="mb-4">
+        <h2>Supprimer un Employé</h2>
+        <form id="delete-employe-form">
+            <div class="mb-3">
+                <label for="deleteEmployeId" class="form-label">ID de l'Employé</label>
+                <input type="number" class="form-control" id="deleteEmployeId" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+
+    <!-- Réaffecter un employé -->
+    <div class="mb-4">
+        <h2>Réaffecter un Employé</h2>
+        <form id="reaffecter-employe-form">
+            <div class="mb-3">
+                <label for="employeId" class="form-label">ID de l'Employé</label>
+                <input type="number" class="form-control" id="employeId" required>
+            </div>
+            <div class="mb-3">
+                <label for="nouveauDepartementId" class="form-label">Nouveau Département</label>
+                <input type="text" class="form-control" id="nouveauDepartementId" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Réaffecter</button>
+        </form>
+    </div>
+
+    <!-- Afficher la liste des employés -->
+    <div class="mb-4">
+        <h2>Liste des Employés</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Salaire</th>
+                <th>Département</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="employes-table">
+            <!-- Les employés seront ajoutés ici via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Afficher l'historique des affectations d'un employé -->
+<div class="mb-4">
+    <h2>Historique des Affectations d'un Employé</h2>
+    <form id="get-historique-employe-form">
+        <div class="mb-3">
+            <label for="historiqueEmployeId" class="form-label">ID de l'Employé</label>
+            <input type="number" class="form-control" id="historiqueEmployeId" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Afficher</button>
+    </form>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Employé</th>
+            <th>Département Précédent</th>
+            <th>Nouveau Département</th>
+            <th>Date d'Affectation</th>
+        </tr>
+        </thead>
+        <tbody id="historique-employe-table">
+        <!-- Les historiques seront ajoutés ici via JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS et Axios -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/employes.js"></script>
+</body>
+</html>
